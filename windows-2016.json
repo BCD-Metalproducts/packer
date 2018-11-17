@@ -1,0 +1,43 @@
+{
+    "builders": [
+        {
+            "type": "qemu",
+            "iso_url": "{{user `iso_url`}}",
+            "iso_checksum_type": "{{user `iso_checksum_type`}}",
+            "iso_checksum": "{{user `iso_checksum`}}",
+            "headless": true,
+            "communicator": "winrm",
+            "winrm_username": "ladmin",
+            "winrm_password": "test123",
+            "winrm_timeout": "6h",
+            "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
+            "floppy_files": [
+                "{{user `autounattend`}}",
+                "./scripts/openssh.ps1",
+                "./ssh/id_rsa.pub"
+            ],
+            "disk_interface": "ide",
+            "net_device": "e1000",
+            "qemuargs": [
+              ["--smp","4"]
+            ]
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "windows-shell",
+            "remote_path": "/tmp/script.bat",
+            "scripts": [
+                "./scripts/disable-auto-logon.bat",
+                "./scripts/openssh.bat",
+                "./scripts/compact.bat"
+            ]
+        }
+    ],
+    "variables": {
+        "iso_url": "./iso/Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO",
+        "iso_checksum_type": "md5",
+        "iso_checksum": "70721288bbcdfe3239d8f8c0fae55f1f",
+        "autounattend": "./answer_files/2016/Autounattend.xml"
+    }
+}

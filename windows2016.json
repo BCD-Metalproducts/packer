@@ -35,7 +35,7 @@
         }
     ],
     "variables": {
-        "iso_url": "./iso/Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO",
+        "iso_url": "./iso/windows2016.iso",
         "iso_checksum_type": "md5",
         "iso_checksum": "70721288bbcdfe3239d8f8c0fae55f1f",
         "autounattend": "./answer_files/2016/Autounattend.xml"

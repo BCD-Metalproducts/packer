@@ -1,3 +1,5 @@
+#! /bin/bash
+
 cd $(dirname "$0")
 
 image="$(echo $1 | cut -d '.' -f1)"

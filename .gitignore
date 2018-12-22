@@ -1,5 +1,6 @@
 output-qemu
 packer_cache
 images
+drivers
 *.ISO
 *.iso

@@ -1,1 +1,1 @@
-powershell.exe 'A:\openssh.ps1'
+powershell.exe -executionpolicy remotesigned -File A:\openssh.ps1

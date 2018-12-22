@@ -1,0 +1,47 @@
+{
+    "builders": [
+        {
+            "type": "qemu",
+            "iso_url": "{{user `iso_url`}}",
+            "iso_checksum_type": "{{user `iso_checksum_type`}}",
+            "iso_checksum": "{{user `iso_checksum`}}",
+            "headless": true,
+            "communicator": "winrm",
+            "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
+            "winrm_username": "ladmin",
+            "winrm_password": "test123",
+            "winrm_timeout": "6h",
+            "floppy_files": [
+                "{{user `autounattend`}}",
+                "./drivers/amd64/Win2016"
+            ],
+            "disk_interface": "ide",
+            "net_device": "virtio-net",
+            "qemuargs": [
+              ["--smp","4"]
+            ]
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "windows-shell",
+            "remote_path": "/tmp/script.bat",
+            "scripts": [
+                "./scripts/disable-auto-logon.bat",
+                "./scripts/compact.bat"
+            ]
+        },
+        {
+           "type": "windows-shell",
+           "inline": [
+              "C:\\Windows\\System32\\Sysprep\\Sysprep.exe /oobe /generalize /shutdown"
+           ]
+        }
+    ],
+    "variables": {
+        "iso_url": "./iso/windows2016.iso",
+        "iso_checksum_type": "md5",
+        "iso_checksum": "70721288bbcdfe3239d8f8c0fae55f1f",
+        "autounattend": "./answer_files/2016/Autounattend.xml"
+    }
+}

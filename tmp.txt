@@ -1,0 +1,1 @@
+            "shutdown_command": "C:\\Windows\\System32\\Sysprep\\sysprep.exe /generalize /shutdown /unattend:A:\\Autounattend.xml",

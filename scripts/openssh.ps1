@@ -2,4 +2,5 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.We
 
 choco install openssh -params '"/SSHServerFeature /KeyBasedAuthenticationFeature"' -confirm
 
-Copy-Item "a:\id_rsa.pub" -Destination "C:\Users\ladmin\.ssh\authorized_keys"
+New-Item "C:\Users\Ladmin\.ssh\authorized_keys" -Force
+Copy-Item "A:\id_rsa.pub" "C:\Users\Ladmin\.ssh\authorized_keys" -Force 

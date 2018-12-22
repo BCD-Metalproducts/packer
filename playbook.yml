@@ -1,0 +1,12 @@
+- hosts: default
+  tasks:
+    - name: Sysprep Image
+      win_shell: 'C:\Windows\System32\Sysprep\sysprep.exe /oobe /generalize /shutdown'
+      ignore_errors: yes
+  vars:
+    ansible_user: "{{ ansible_user }}"
+    ansible_password: "{{ ansible_pass }}"
+    ansible_port: 5985
+    ansible_connection: winrm
+    ansible_winrm_scheme: http
+    ansible_winrm_server_cert_validation: ignore
